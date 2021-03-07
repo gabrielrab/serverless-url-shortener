@@ -1,0 +1,41 @@
+service: url-shortener
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: ${env:AWS_REGION}
+  stage: ${env:STAGE}
+  timeout: 10
+  memorySize: 256
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - 'dynamodb:*'
+      Resource: 'arn:aws:dynamodb:*:*:*'
+
+custom:
+  dotenv:
+    logging: false
+
+  serverless-offline:
+    host: '0.0.0.0'
+
+  dynamodb:
+    stages:
+      - ${opt:stage, self:provider.stage}
+
+    start:
+      host: ${env:DYNAMO_DB_URL}
+      port: ${env:DYNAMO_DB_PORT}
+      inMemory: false
+      migrate: true
+      noStart: true
+
+functions: ${file(serverless-dynamic.js)}
+
+resources:
+  Resource: ${file(src/modules/resources/dynamodb.yml)}

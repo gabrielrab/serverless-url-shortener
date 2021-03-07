@@ -1,0 +1,6 @@
+helthcheck:
+  handler: src/modules/endpoints/helthcheck.helth
+  events:
+    - http:
+        path: /helth
+        method: get

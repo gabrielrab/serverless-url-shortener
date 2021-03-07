@@ -1,0 +1,5 @@
+node_modules
+*.lock
+.env
+.serverless
+.env.local

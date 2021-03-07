@@ -1,0 +1,33 @@
+{
+  "name": "serverless-url-shortener",
+  "version": "1.0.0",
+  "description": "Rapicare Serverless Url Shortener",
+  "main": "index.js",
+  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "scripts": {
+    "dev": "ENV=local nodemon --exec serverless offline start --stage local --service=url-shortener"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.0.0",
+    "@commitlint/config-conventional": "^12.0.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "husky": "^5.1.1",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1",
+    "serverless-dotenv-plugin": "^3.8.1",
+    "serverless-dynamodb-local": "^0.2.39",
+    "serverless-offline": "^6.8.0"
+  },
+  "dependencies": {
+    "structure": "^2.0.1",
+    "uuid": "^8.3.2",
+    "yamljs": "^0.3.0"
+  }
+}

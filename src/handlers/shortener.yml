@@ -1,0 +1,35 @@
+# Auth
+private-auth:
+  handler: src/middlewares/private.masterKey
+
+# Endpoints
+shortener-list:
+  handler: src/modules/endpoints/shortener.list
+  events:
+    - http:
+        path: /shortener
+        method: get
+        authorizer: private-auth
+
+shortener-create:
+  handler: src/modules/endpoints/shortener.create
+  events:
+    - http:
+        path: /shortener
+        method: post
+        authorizer: private-auth
+
+shortener-redirect:
+  handler: src/modules/endpoints/shortener.redirect
+  events:
+    - http:
+        path: /{short}
+        method: get
+
+shortener-delete:
+  handler: src/modules/endpoints/shortener.delete
+  events:
+    - http:
+        path: /shortener/{id}
+        method: delete
+        authorizer: private-auth
